@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+.jumbotron-fluid{
+
+  background: lightblue;
+}
+.list-group-item{
+
+  background: red;
+  width: 85%;
+  border: 1px solid blue;
+  padding: 5px;
+  margin: 10px;
+
+}

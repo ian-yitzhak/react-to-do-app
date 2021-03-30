@@ -1,25 +1,87 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import React , {Component} from 'react';
+
+class App extends  Component {
+
+  state = {
+    todoList : []
+  }
+
+  render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="jumbotron jumbotron-fluid">
+    <div className="container">
+      <h3 className="text-center">TODO - App <span> <p> please add your tasks </p> </span> </h3>
+     
+    </div>
+    </div>
+
+    <form className="mb-3" onSubmit={this.handleSubmit} >
+    <div className="input-group">
+
+    <input type="text" name ="todoTask" className = "form-control" placeholder="add a task" autocomplete="off"/> 
+
+    <div className="input-group-append"> 
+
+    <button type="submit" className="btn btn-outline-success">Add </button>
+
+    </div>
+
+    </div>
+
+    </form> 
+
+    <ul className="list-group">
+
+    {
+
+      this.state.todoList.map(
+        (item ,index) =>{
+
+          return <li className="list-group-item" key={index}> 
+          {item}
+
+          <button className="btn btn-sm btn-outline-success float-right" onClick={(event) => {this.deleteTodoTask(event,index)}}> delete </button>
+
+          </li>
+
+        }
+
+        )
+    }
+
+     </ul>
+
+
     </div>
   );
+}
+
+
+
+handleSubmit = (event) => {
+var taskDesc = event.target.elements.todoTask.value;
+
+if(taskDesc.length > 0){
+  this.setState({
+    todoList:[...this.state.todoList, taskDesc]
+  })
+event.target.reset();
+
+}
+event.preventDefault();
+}
+
+deleteTodoTask = (event,index) =>{
+  var taskArray = [...this.state.todoList]
+  taskArray.splice(index,1)
+  this.setState({todoList:taskArray})
+}
+
+
+
 }
 
 export default App;
